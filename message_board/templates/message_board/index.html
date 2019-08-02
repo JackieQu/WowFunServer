@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>留言板</title>
+    </head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            word-break: break-all;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body {
+            background-color: white;
+        }
+        ul, li {
+            list-style-type: none;
+        }
+        h1 {
+            margin: 20px;
+            color: orange;
+            text-align: center;
+        }
+        .msg-main-view {
+            width: 80%;
+            margin-left: 10%;
+            border: solid 1px orange;
+        }
+        .msg-list-view .header, 
+        .msg-post-view .header {
+            height: 60px;
+            padding: 0 20px;
+            color: white;
+            line-height: 60px;
+            background-color: orange;
+        }
+        .msg-list,
+        .msg-post {
+            width: calc(100% - 40px);
+            min-height: 180px;
+            margin: 20px;
+            font-size: 15px;
+            border-radius: 10px;
+        }
+        .msg-list li {
+            padding: 10px 0;
+            border-bottom: dashed 1px orange;
+        }
+        .msg-list li .title {
+            display: flex;
+            justify-content: space-between;
+            height: 30px;
+            padding: 0 10px;
+            margin: 10px 0;
+            line-height: 30px;
+            color: white;
+            background-color: lightgray;
+        }
+        .msg-post form {
+            text-align: center;
+        }
+        .msg-post textarea {
+            width: calc(100% - 20px);
+            height: 100px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 15px;
+            border: dashed 1px orange;
+        }
+        .msg-post button {
+            width: 100px;
+            height: 40px;
+            color: white;
+            background-color: orange;
+            border-radius: 10px;
+        }
+    </style>
+    <body>
+        <h1>留言板</h1>
+        <div class="msg-main-view">
+            <div class="msg-list-view">
+                <div class="header">留言列表</div>
+                <div class="msg-list">
+                    {% if msg_list %}
+                        {% for msg in msg_list %}
+                            <li>
+                                <div class="title">
+                                    <span>{{msg.index}}楼</span>
+                                    <span>{{msg.date_time}}</span>
+                                </div>
+                                <p>{{msg.content}}</p>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: orange; text-align: center;">暂无留言</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="msg-post-view">
+                <div class="header">添加留言</div>
+                <div class="msg-post">
+                    <form method="post" action="http://127.0.0.1:8000/message/msg/create/">
+                        {% csrf_token %}
+                        <textarea name="content"></textarea>
+                        <button>提交</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>
