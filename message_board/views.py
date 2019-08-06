@@ -11,7 +11,7 @@ def index(request):
         msg.index = i + 1
     context = {'msg_list': msg_list}
     
-    return render(request, 'message_board/index.html', context)
+    return render(request, 'message/index.html', context)
 
 def msg_create(request):
     content = request.POST.get('content', default=None)

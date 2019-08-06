@@ -13,7 +13,7 @@ def info(request):
     items = []
     for i in range(len(info_list)):
         info = info_list[i]
-        info.index = len(info_list) - i
+        info.index = i + 1
         info.date_time = info.date_time.strftime('%Y-%m-%d %H:%M:%S')
         item = {
             'pk': info.index,
@@ -40,6 +40,6 @@ def info_create(request):
         )
         info.save()
         
-        return JsonResponse({'result': 'ok'}, safe=False)
+        return JsonResponse({'result': 'succeed'}, safe=False)
     else:
         return JsonResponse({'result': 'failed'}, safe=False)

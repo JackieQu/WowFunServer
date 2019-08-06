@@ -11,4 +11,4 @@ class Information(models.Model):
     date_time = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-date_time']
+        ordering = ['date_time']
