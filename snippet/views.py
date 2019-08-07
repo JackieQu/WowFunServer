@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from snippet.models import Snippet
-from snippet.serializers import SnippetSerializer2
+from snippet.serializers import SnippetSerializer2, SnippetSerializer3
 
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -223,7 +223,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 
 class SnippetViewSet(viewsets.ModelViewSet):
     queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer2
+    serializer_class = SnippetSerializer3
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
 
     @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
